@@ -9,6 +9,10 @@ body{
 
 }
 
+object {
+    width: 100%;
+}
+
 .titles {
     font-family: 'Doppio One', sans-serif;
 }
