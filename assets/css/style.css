@@ -9,8 +9,14 @@ body{
 
 }
 
-object {
+#object_header{
     width: 100%;
+    height: fit-content;
+}
+
+#object_footer {
+    width: 100%;
+    height: 350px;
 }
 
 .titles {
@@ -26,5 +32,8 @@ object {
 /* mobile */
 
 @media only screen and (max-width: 768px) {
-    
+    #object_header::after {
+        width: 100%;
+        height: 300px;
+    }
 }

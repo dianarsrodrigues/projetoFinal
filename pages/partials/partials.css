@@ -30,6 +30,10 @@ a {
     color: black ;
 }
 
+a:hover {
+    color: rgb(126, 121, 121) ;
+}
+
 .nav-item {
     padding: 0 0.5vw 0 0.5vw;
 }
