@@ -1,0 +1,46 @@
+.page {
+    margin: 0 10% 30px;
+}
+
+p {
+    font-size: 18px;
+}
+
+#insertTitle {
+    margin-bottom: 30px;
+}
+
+input[type="text"] {
+    font-family: 'Doppio One', sans-serif;
+    font-size: 32px;
+    color: black;
+}
+
+
+input[type="text"]::placeholder {
+    color: black;
+}
+
+input {
+    border: 1px solid transparent;
+    outline: none;
+}
+
+.buttons-container {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.buttons-container button {
+    display: inline-block;
+    margin-right: 20px; 
+}
+
+.button {
+    font-family: 'Doppio One', sans-serif;
+    font-size: 20px;
+    color: black;
+    background-color: white;
+}
+
+
