@@ -1,5 +1,12 @@
 .page {
     margin: 50px 10% 30px;
+    max-width: 1200px;
+}
+
+@media only screen and (min-width: 1500px) {
+    .page {
+        margin: 50px auto 30px;
+    }
 }
 
 p {
