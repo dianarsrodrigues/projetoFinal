@@ -4,10 +4,17 @@
     padding-bottom: 20px;
     padding-top: 20px;
     width: 100%;
-    position: absolute;
+}
+
+.navbar-brand {
+    margin-right: 0;
 }
 
 .titles {
+    padding: 20px;
+}
+
+.subtitle {
     padding: 20px;
 }
 
@@ -24,6 +31,10 @@
 .nav-link-custom:hover {
     color: black;
     border-bottom: solid black 1px;
+}
+
+.navbar-toggler-right {
+    padding: 0;
 }
 
 a {
@@ -48,6 +59,10 @@ a:hover {
         position: static;
     }
 
+    .subtitle {
+        display: none;
+    }
+
     .nav-link-custom:hover {
         border-bottom: none;
         border-left: none;
@@ -64,6 +79,7 @@ a:hover {
     font-size: 20px;
     text-align: center;
     position: absolute;
+    border-top: 0.5px solid rgb(214, 211, 211);
   }
   
   .social-icon {
