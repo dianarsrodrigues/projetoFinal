@@ -1,5 +1,5 @@
 .page {
-    margin: 0 10% 30px;
+    margin: 50px 10% 30px;
 }
 
 p {
@@ -41,6 +41,17 @@ input {
     font-size: 20px;
     color: black;
     background-color: white;
+    cursor: pointer;
+}
+
+.button:hover {
+    color: rgb(126, 121, 121);
+}
+
+@media only screen and (max-width: 768px) {
+    #insertTitle {
+        font-size: 28px;
+    }
 }
 
 

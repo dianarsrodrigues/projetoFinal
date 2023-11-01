@@ -1,2 +1,6 @@
 font-family: 'Doppio One', sans-serif; 
 font-family: 'Dosis', sans-serif;
+
+
+cor hover links e botões
+color: rgb(126, 121, 121) ;
