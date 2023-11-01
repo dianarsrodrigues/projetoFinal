@@ -10,33 +10,6 @@
     margin-right: 0;
 }
 
-.titles {
-    padding: 20px;
-}
-
-.subtitle {
-    padding: 20px;
-}
-
-.navbar-nav {
-    right: 0;
-    position: absolute;
-}
-
-.nav-link-custom {
-    text-align: center;
-    padding: 10px;
-}
-
-.nav-link-custom:hover {
-    color: black;
-    border-bottom: solid black 1px;
-}
-
-.navbar-toggler-right {
-    padding: 0;
-}
-
 a {
     color: black ;
 }
@@ -45,13 +18,50 @@ a:hover {
     color: rgb(126, 121, 121) ;
 }
 
+.brand-name, brand-function {
+    padding: 20px;
+}
+
+.brand-name {
+    font-family: 'Doppio One', sans-serif;
+}
+
+.navbar-toggler-right {
+    padding: 0;
+}
+
+.navbar-nav {
+    right: 0;
+    position: absolute;
+}
+
 .nav-item {
-    padding: 0 0.5vw 0 0.5vw;
+    padding: 0 30px;
+    border-right: 1px solid black;
+    font-size: 20px;
+}
+
+.nav-item:last-child {
+    border: none;
+}
+
+.nav-link-custom {
+    text-align: center;
+}
+
+.nav-link-custom:hover {
+    color: black;
+    border-bottom: 1px solid black;
+}
+
+@media only screen and (max-width: 1000) {
+    .nav-item {
+        padding: 0 10px;
+    }
 }
 
 .user {
     padding-right: 15px;
-    font-size: 20px;
 }
 
 @media only screen and (max-width: 768px) {
