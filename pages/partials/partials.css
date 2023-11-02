@@ -69,6 +69,10 @@ a:hover {
         position: static;
     }
 
+    .nav-item {
+        border-right: none;
+    }
+
     .subtitle {
         display: none;
     }
