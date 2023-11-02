@@ -1,0 +1,28 @@
+
+.card-img-top {
+  border-radius: 50%;
+  object-fit: cover;
+  width: 200px;
+  height: 200px;
+}
+
+.page {
+  margin: 0 10% 30px;
+}
+
+.card .card-body {
+  padding-bottom: 60px;
+}
+
+.btn-link {
+  position: absolute;
+  color: black;
+  text-align: right;
+  font-family:'Doppio One', sans-serif;
+  font-size: 24 px;
+  bottom: 15px;
+  left: 15px;
+  right: 15px;
+}
+
+
