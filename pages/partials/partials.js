@@ -76,5 +76,68 @@ class Footer extends HTMLElement {
   }
 }
 
+class Post extends HTMLElement {
+  get title() {
+    return this.hasAttribute("title") && this.getAttribute("title");
+  }
+  get date() {
+    return this.hasAttribute("date") && this.getAttribute("date");
+  }
+  get text() {
+    return this.hasAttribute("text") && this.getAttribute("text");
+  }
+  get image() {
+    return this.hasAttribute("image") && this.getAttribute("image");
+  }
+
+  constructor() {
+    super();
+
+    // Começo
+    let template = '<div class="row">';
+
+    // Imagem
+    if (this.image) {
+      template += `
+        <div class="col-12 col-md-4">
+            <div class="card border-0">
+            <div class="card-body">
+                <img
+                class="card-img-top mb-3"
+                src="${this.image}"
+                alt="Post main image"
+                />
+            </div>
+            </div>
+        </div>
+      `;
+    }
+
+    // Conteudo
+    template += `
+        <div class="col-12 ${this.image ? "col-md-8" : ""}">
+            <div class="card border-0">
+            <div class="card-body">
+                <h3 class="titles">${this.title}</h3>
+                <div class="buttons-container">
+                <input class="button" type="button" value="Editar Post" />
+                <input class="button" type="button" value="Apagar Post" />
+                </div>
+                <p class="data">${this.date}</p>
+                <p class="card-text">${this.text}</p>
+                <button type="button" class="btn btn-link">Ver Mais</button>
+            </div>
+            </div>
+        </div>
+    `;
+
+    // Fim
+    template += "</div>";
+
+    this.innerHTML = template;
+  }
+}
+
 customElements.define("my-header", Header);
 customElements.define("my-footer", Footer);
+customElements.define("my-post", Post);
