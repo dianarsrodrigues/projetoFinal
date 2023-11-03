@@ -18,15 +18,15 @@ const openConection = () => {
 //Inserir Post
 const functionInsertPost = (req, res) => {
     const con = openConection();
-    const queryInsert = "INSERT INTO post(created_at, edited_at, delete_at, title_post, text_post) VALUES (?)";
+    const queryInsert = "INSERT INTO post(created_at, edited_at, delete_at, title, text) VALUES (?)";
 
 
     let created_at = new Date();
 
-    const values = [[created_at, req.body.edited_at, req.body.delete_at, req.body.title_post, req.body.text_post]];
+    const values = [[created_at, req.body.edited_at, req.body.delete_at, req.body.title, req.body.text]];
     con.query(queryInsert, values, (err, result) => {
         if (err) throw err;
-        res.send("Post adicionado com o id " + result.insertId + "!");
+        res.json({ id : result.insertId });
     });
     con.end();
 };
@@ -37,15 +37,19 @@ const functionInsertPost = (req, res) => {
 const functionUpdatePost = (req, res) => {
     const con = openConection();
     
-    const queryUpdate = "UPDATE post SET edited_at = ?, title_post = ?, text_post= ? WHERE id = ?;";
+    const queryUpdate = "UPDATE post SET edited_at = ?, title = ?, text= ? WHERE id = ?;";
 
     let edited_at = new Date();
-
-    const values = [[edited_at],[req.body.title_post], [req.body.text_post], [req.params.id]];
+    
+    const values = [[edited_at],[req.body.title], [req.body.text], [req.params.id]];
 
     con.query(queryUpdate, values, (err, result) => {
         if (err) throw err;
-        res.send("Update feito com sucesso!");
+        if (result.affectedRows) {
+            res.json({ message : 'Post updated.' });
+        } else {
+            res.status(404).json({ message : 'Post not found.' });
+        }
     });
     con.end();
 
@@ -56,7 +60,7 @@ const functionDeletePost = (req, res) => {
     const con = openConection();
     // const queryDelete = "DELETE FROM post WHERE id = (?)";
 
-    const queryDelete = "UPDATE post SET delete_at = ?  WHERE id = ?;";
+    const queryDelete = "UPDATE post SET delete_at = ? WHERE id = ?;";
 
     let delete_at = new Date();
 
@@ -64,7 +68,11 @@ const functionDeletePost = (req, res) => {
 
     con.query(queryDelete, values, (err, result) => {
         if (err) throw err;
-        res.send("Removido com sucesso o id " + req.params.id + "!");
+        if (result.affectedRows) {
+            res.json({ message : 'Post deleted.' });
+        } else {
+            res.status(404).json({ message : 'Post not found.' });
+        }
     });
     con.end();
 };
@@ -85,7 +93,7 @@ const functionGetPost = (req, res) => {
 const functionGetPosts = (req, res) => {
     const con = openConection();
 
-    const querySearch = "SELECT * FROM post WHERE delete_at = '0000-00-00';";
+    const querySearch = "SELECT * FROM post WHERE delete_at IS NULL;";
     
     con.query(querySearch, (err, result) => {
         if (err) throw err;
