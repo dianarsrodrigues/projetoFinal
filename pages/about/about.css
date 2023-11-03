@@ -1,0 +1,35 @@
+/* About */
+
+.page {
+    margin: 0 10% 30px;
+  }
+
+.sobre-mim {
+    font-size: 18px;
+    text-align: justify;
+    margin-left: 5%;
+    margin-top: 5%;
+    margin-bottom: 5%;
+    font-family: 'Dosis', sans-serif;
+}
+
+h1 {
+    font-family: 'Doppio One', sans-serif;
+    font-size: 100px;
+}
+
+h3 {
+    font-family: 'Doppio One', sans-serif;
+    font-size: 30px;
+}
+
+#img-perfil {
+    height: 350px;
+    width: 350px;
+    border-radius: 50%;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+}
