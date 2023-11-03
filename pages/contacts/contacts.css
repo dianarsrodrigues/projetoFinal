@@ -1,0 +1,35 @@
+
+  .titles {
+    margin: 0;
+    padding: 0;
+  }
+  
+  
+  .buttons-container {
+    text-align: left;
+    margin: 0;
+  }
+  
+  .button {
+    padding-bottom: 20px;
+    color: rgb(86, 82, 82);
+    font-size: 18px;
+    padding-left: 0;
+    padding-top: 0;
+  }
+
+  .btn-link {
+    position: absolute;
+    color: black;
+    text-align: right;
+    font-family:'Doppio One', sans-serif;
+    font-size: 24 px;
+    bottom: 15px;
+    left: 15px;
+    right: 15px;
+  }
+
+  .row {
+    display: flex;
+    flex-flow: row wrap;
+  }
