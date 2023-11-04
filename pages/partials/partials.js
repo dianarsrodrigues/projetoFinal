@@ -20,19 +20,29 @@ class Header extends HTMLElement {
                 <div id="navb" class="navbar-collapse collapse hide">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Currículo</a>
+                            <a class="nav-link nav-link-custom" href="cv.html">Currículo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Projetos</a>
+                            <a class="nav-link nav-link-custom" href="projects.html">Projetos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Blog</a>
+                            <a class="nav-link nav-link-custom" href="blog.html">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Contato</a>
+                            <a class="nav-link nav-link-custom" href="contacts.html">Contato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#"><span class="fas fa-user user"></span>Login</a>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fas fa-user user">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                    <button class="dropdown-item" type="button">Login</button>
+                                    <a href= "criarPost.html">
+                                        <button class="dropdown-item" type="button">Criar novo post</button>
+                                    </a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -76,7 +86,11 @@ class Footer extends HTMLElement {
   }
 }
 
+
 class Post extends HTMLElement {
+  get id() {
+    return this.hasAttribute("id") && this.getAttribute("id");
+  }
   get title() {
     return this.hasAttribute("title") && this.getAttribute("title");
   }
@@ -87,12 +101,24 @@ class Post extends HTMLElement {
     return this.hasAttribute("text") && this.getAttribute("text");
   }
   get image() {
-    return this.hasAttribute("image") && this.getAttribute("image");
+    return this.hasAttribute("image") && this.getAttribute("image") != "undefined" && this.getAttribute("image");
   }
+
 
   constructor() {
     super();
 
+    const dataHora = this.date;
+
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    };
+
+    const dataHoraFormatada = new Date(dataHora).toLocaleString('pt-PT', options);
+
+    
     // Começo
     let template = '<div class="row">';
 
@@ -118,14 +144,19 @@ class Post extends HTMLElement {
         <div class="col-12 ${this.image ? "col-md-8" : ""}">
             <div class="card border-0">
             <div class="card-body">
-                <h3 class="titles">${this.title}</h3>
+                <a href= "verPost.html?id=${this.id}">
+                    <h3 class="titles">${this.title}</h3>
+                </a>
                 <div class="buttons-container">
-                <input class="button" type="button" value="Editar Post" />
-                <input class="button" type="button" value="Apagar Post" />
+                <a href= "criarPost.html?id=${this.id}">
+                    <input class="button" type="button" value="Editar Post" />
+                </a>
                 </div>
-                <p class="data">${this.date}</p>
+                <p class="data">${dataHoraFormatada}</p>
                 <p class="card-text">${this.text}</p>
-                <button type="button" class="btn btn-link">Ver Mais</button>
+                <a href= "verPost.html?id=${this.id}">
+                    <button type="button" class="btn btn-link">Ver Mais</button>
+                </a>
             </div>
             </div>
         </div>

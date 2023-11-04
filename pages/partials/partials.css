@@ -18,7 +18,7 @@ a:hover {
     color: rgb(126, 121, 121) ;
 }
 
-.brand-name, brand-function {
+.brand-name, .brand-function {
     padding: 20px;
 }
 
@@ -64,6 +64,10 @@ a:hover {
     padding-right: 15px;
 }
 
+button {
+    background-color: white;
+}
+
 @media only screen and (max-width: 768px) {
     .navbar-nav {
         position: static;
@@ -73,7 +77,7 @@ a:hover {
         border-right: none;
     }
 
-    .subtitle {
+    .brand-function {
         display: none;
     }
 

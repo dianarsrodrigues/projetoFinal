@@ -1,3 +1,7 @@
+.hide-post {
+    visibility: hidden;
+}
+
 .titles {
     margin: 0;
     padding: 0;

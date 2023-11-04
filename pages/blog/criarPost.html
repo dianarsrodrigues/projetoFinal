@@ -37,30 +37,80 @@
   <body>
     <my-header></my-header>
     <section class="page">
-        <form action="">
-            <input type="text" id="insertTitle" placeholder="Inserir um título..." required >
+        <form id="texto-form">
+            <input type="text" id="title" placeholder="Inserir um título..." required >
             <div id="editor"></div>
-            
+
             <div class="buttons-container">
-                <input  class="button" type="reset" value="Cancelar">
-                <input  class="button" type="submit" value="Publicar">
+                <input id="reset" class="button" value="Cancelar">
+                <input id="submit" class="button" type="submit" value="Publicar">
             </div>
         </form>
     </section>
     <my-footer></my-footer>
     <script src="./../partials/partials.js"></script>
-  </body>
+    <script src="./../../services/postService.js"></script>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then(res => {
-                console.log(res);
-                document.querySelector('input[type=reset]').addEventListener('click', () => {
-                    res.data.set('');
+
+        const queryString = window.location.search;
+        const urlParams = new URLSearchParams(queryString);
+        const id = urlParams.get("id");
+        
+        const initEditor = async (value = '', defaultTitle = '') => {
+            const res = await ClassicEditor.create(document.querySelector('#editor'))
+            if (res) {
+                res.data.set(value);
+                document.querySelector('#reset').addEventListener('click', () => {
+                    document.getElementById("title").value = defaultTitle;
+                    res.data.set(value);
                 })
-            })
-            .catch(error => {
-                console.error( error );
-            } );
+                return res;
+            }
+            return null;
+        }
+        const addEventSubmit = (editor) => {
+            document.querySelector('#submit').addEventListener('click', async (event) => {
+                event.preventDefault();
+
+                const title = document.getElementById("title").value;
+                const text = editor.getData();
+                const response = id ? await updatePost(id, title, text) : await createPost(title, text);
+
+                if (response) {
+                    window.location.href = `verPost.html?id=${response.id || id}`;
+                }
+            });
+        }
+
+        const createAction = async () => {
+            const myEditor = await initEditor();
+            addEventSubmit(myEditor);
+        }
+
+        const updateAction = async () => {
+            getPost(id).then(async (postArray) => {
+                if (postArray.length > 0) {
+                    const post = postArray[0]
+
+                    document.getElementById("title").value = post.title;
+                    const myEditor = await initEditor(post.text, post.title);
+                    console.log('asdasda', myEditor);
+                    addEventSubmit(myEditor);
+                } else {
+                    console.error("Post do not exist");
+                }
+            });
+        }
+
+        if (id) {
+            // Edit
+            updateAction();
+        } else {
+            // Create
+            createAction();
+        }
+
+            
     </script>
+  </body> 
 </html>
