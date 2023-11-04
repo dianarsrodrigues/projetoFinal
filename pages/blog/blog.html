@@ -46,21 +46,17 @@
   </head>
 
   <body>
-    <!-- header -->
-    <!-- Objeto para importar header -->
     <my-header></my-header>
-
-    <section id="posts" class="container page"></section>
-
-    <!-- Objeto para importar footer -->
+    <section id="posts" class="container"></section>
     <my-footer></my-footer>
+
     <script src="./../partials/partials.js"></script>
     <script src="./../../services/postService.js"></script>
     <script>
       const postsSection = document.querySelector("#posts");
       getPosts().then((posts) =>
         posts.forEach((post) => {
-          postsSection.innerHTML += `<my-post title="${post.title}" text="${post.text}" date="${post.date}" image="${post.image}"></my-post>`;
+          postsSection.innerHTML += `<my-post id="${post.id}" title="${post.title}" text="${post.text}" date="${post.created_at}" image="${post.image}"></my-post>`;
         })
       );
     </script>
