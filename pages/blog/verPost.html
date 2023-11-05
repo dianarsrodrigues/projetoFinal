@@ -39,7 +39,7 @@
     <section id="post" class="container hide-post">
         <div class="title-buttons-container">
             <h1 id ="title" class="titles">$title</h1>
-            <div class="buttons-container">
+            <div id="buttons-login" class="buttons-container">
                 <input id="edit-button" class="button" type="button" value="Editar Post">
                 <input id="delete-button" class="button" type="button" value="Apagar Post" data-toggle="modal" data-target="#exampleModalCenter">
             </div>
@@ -63,7 +63,7 @@
                 <div class="modal-body">
                     <p>Tem certeza de que deseja apagar este post? Esta ação não pode ser desfeita.</p>
                 </div>
-                <div class="modal-footer">
+                <div  class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                 <button id="agree-delete" type="button" class="btn btn-danger">Apagar Post</button>
                 </div>
@@ -128,6 +128,16 @@
                 window.location.href = `blog.html`;
             });
         });
+
+        const token = localStorage.getItem('token');
+
+        const buttonsLogin = document.getElementById("buttons-login");
+
+        if (token == null) {
+            buttonsLogin.style.display = "none";
+        } else {
+            buttonsLogin.style.display = "block";
+        }
 
       </script>
   </body>

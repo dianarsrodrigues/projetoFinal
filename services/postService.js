@@ -25,7 +25,8 @@ const getPost = async (id) => {
 };
 
 const createPost = async (title, text) => {
-  const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+  const token = localStorage.getItem('token')
+  const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` }
   const body = JSON.stringify({ title, text });
   const response = await fetch(URL + "post/new", { method: 'POST', headers, body });
   if (response.ok) {
@@ -38,7 +39,8 @@ const createPost = async (title, text) => {
 };
 
 const updatePost = async (id, title, text) => {
-  const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json' }
+  const token = localStorage.getItem('token')
+  const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` }
   const body = JSON.stringify({ title, text });
   const response = await fetch(URL + "post/update/" + id, { method: 'POST', headers, body });
   if (response.ok) {
@@ -51,7 +53,9 @@ const updatePost = async (id, title, text) => {
 };
 
 const deletePost = async (id) => {
-  const response = await fetch(URL + "post/delete/" + id, { method: 'POST'});
+  const token = localStorage.getItem('token')
+  const headers = { "Authorization": `Bearer ${token}` }
+  const response = await fetch(URL + "post/delete/" + id, { method: 'POST', headers });
   if (response.ok) {
     const result = await response.json();
     return result;
@@ -60,5 +64,6 @@ const deletePost = async (id) => {
   }
   return null;
 };
+
 
 

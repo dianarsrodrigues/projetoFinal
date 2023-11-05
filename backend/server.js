@@ -1,5 +1,9 @@
 const express = require("express");
 const cors = require("cors");
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
+// const bodyParser = require('body-parser');
+
 const app = express();
 const PORT = 3000;
 
@@ -11,13 +15,14 @@ app.use(
   })
 );
 
+
 let sqlUtils = require("./sqlUtils.js");
 
 app.get("/", (req, res) => {
   res.json({ message: "ok" });
 });
 
-//Inserir Post
+//Insert Post
 app.post("/post/new", sqlUtils.functionInsertPost);
 
 //Update Post
@@ -31,6 +36,16 @@ app.get("/post/:id", sqlUtils.functionGetPost);
 
 //Get Blog
 app.get("/posts", sqlUtils.functionGetPosts);
+
+// Autentication ---------------------------
+
+//Insert new user
+app.post('/register', sqlUtils.functionRegister);
+
+ // Login and generate a token
+app.post('/login', sqlUtils.functionLogin);
+
+
 // app.get("/posts", (req, res) => {
 //   res.json([
 //     {
@@ -58,6 +73,9 @@ app.get("/posts", sqlUtils.functionGetPosts);
 //     },
 //   ]);
 // });
+
+
+
 
 app.listen(PORT, (err) => {
   if (err) console.log("Error in server setup");

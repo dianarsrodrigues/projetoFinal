@@ -20,16 +20,16 @@ class Header extends HTMLElement {
                 <div id="navb" class="navbar-collapse collapse hide">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="cv.html">Currículo</a>
+                            <a class="nav-link nav-link-custom" href="/pages/cv/cv.html">Currículo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="projects.html">Projetos</a>
+                            <a class="nav-link nav-link-custom" href="/pages/projects/projects.html">Projetos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="blog.html">Blog</a>
+                            <a class="nav-link nav-link-custom" href="/pages/blog/blog.html">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="contacts.html">Contato</a>
+                            <a class="nav-link nav-link-custom" href="/pages/contacts/contacts.html">Contato</a>
                         </li>
                         <li class="nav-item">
                             <div class="dropdown">
@@ -37,9 +37,14 @@ class Header extends HTMLElement {
                                     <span class="fas fa-user user">
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
-                                    <button class="dropdown-item" type="button">Login</button>
-                                    <a href= "criarPost.html">
-                                        <button class="dropdown-item" type="button">Criar novo post</button>
+                                    <a href= "/pages/login/login.html">
+                                        <button id="login-button" class="dropdown-item" type="button">Login</button>
+                                    </a>
+                                    <a href= "index.html">
+                                        <button id="logout-button" class="dropdown-item" type="button" action="/logout"  method="POST">Sair</button>
+                                    </a>
+                                    <a href= "/pages/blog/criarPost.html">
+                                        <button id="createPost-button" class="dropdown-item" type="button">Criar novo post</button>
                                     </a>
                                 </div>
                             </div>
@@ -50,6 +55,32 @@ class Header extends HTMLElement {
         </header>
     `;
     this.innerHTML = template;
+
+    const token = localStorage.getItem('token');
+
+    const logoutButton = document.getElementById("logout-button");
+    const loginButton = document.getElementById("login-button");
+    const createPostButton = document.getElementById("createPost-button");
+
+    if (token == null) {
+        loginButton.style.display = "flex";
+        logoutButton.style.display = "none";
+        createPostButton.style.display = "none";
+    } else {
+        loginButton.style.display = "none";
+        logoutButton.style.display = "flex";
+        createPostButton.style.display = "flex";
+    }
+    
+    document.querySelector('#logout-button').addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        localStorage.removeItem('token');
+        logoutButton.style.display = "none";
+        loginButton.style.display = "flex";
+        createPostButton.style.display = "none";
+        window.location.href = `../../index.html`;
+    });
   }
 }
 
@@ -98,12 +129,11 @@ class Post extends HTMLElement {
     return this.hasAttribute("date") && this.getAttribute("date");
   }
   get text() {
-    return this.hasAttribute("text") && this.getAttribute("text");
+    return this.hasAttribute("text") && decodeHTML(this.getAttribute("text"));
   }
   get image() {
     return this.hasAttribute("image") && this.getAttribute("image") != "undefined" && this.getAttribute("image");
   }
-
 
   constructor() {
     super();
@@ -117,7 +147,7 @@ class Post extends HTMLElement {
     };
 
     const dataHoraFormatada = new Date(dataHora).toLocaleString('pt-PT', options);
-
+    const hasToken = localStorage.getItem('token');
     
     // Começo
     let template = '<div class="row">';
@@ -147,13 +177,15 @@ class Post extends HTMLElement {
                 <a href= "verPost.html?id=${this.id}">
                     <h3 class="titles">${this.title}</h3>
                 </a>
-                <div class="buttons-container">
-                <a href= "criarPost.html?id=${this.id}">
-                    <input class="button" type="button" value="Editar Post" />
-                </a>
-                </div>
+                ${hasToken ?
+                    `<div class="buttons-container">
+                        <a href= "criarPost.html?id=${this.id}">
+                            <input id="edit-button" class="button" type="button" value="Editar Post" />
+                        </a>
+                    </div>` : ''
+                }
                 <p class="data">${dataHoraFormatada}</p>
-                <p class="card-text">${this.text}</p>
+                <div class="card-text">${this.text}</div>
                 <a href= "verPost.html?id=${this.id}">
                     <button type="button" class="btn btn-link">Ver Mais</button>
                 </a>
