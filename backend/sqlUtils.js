@@ -1,4 +1,7 @@
 const mysql = require('mysql');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
+const secretKey = 'fraseparacomplicarotoken';
 
 const openConection = () => {
     const con = mysql.createConnection({
@@ -15,11 +18,28 @@ const openConection = () => {
     return con;
 };
 
+const verifyToken = (req, res) => {
+    let token = req.headers.authorization;
+
+    token = token.replace("Bearer ", "");
+    if (!token) {
+        return res.status(401).json({ message: 'Token missing' });
+    }
+
+    jwt.verify(token, secretKey, (err) => {
+        if (err) {
+        return res.status(401).json({ message: 'Invalid token' });
+        }
+    });
+}
+
 //Inserir Post
 const functionInsertPost = (req, res) => {
+    verifyToken(req, res);
+    console.log("criarPost")
     const con = openConection();
+    
     const queryInsert = "INSERT INTO post(created_at, edited_at, delete_at, title, text) VALUES (?)";
-
 
     let created_at = new Date();
 
@@ -35,6 +55,7 @@ const functionInsertPost = (req, res) => {
 
 //Update Post
 const functionUpdatePost = (req, res) => {
+    verifyToken(req, res);
     const con = openConection();
     
     const queryUpdate = "UPDATE post SET edited_at = ?, title = ?, text= ? WHERE id = ?;";
@@ -57,6 +78,7 @@ const functionUpdatePost = (req, res) => {
 
 //Delete Post
 const functionDeletePost = (req, res) => {
+    verifyToken(req, res);
     const con = openConection();
     // const queryDelete = "DELETE FROM post WHERE id = (?)";
 
@@ -103,6 +125,73 @@ const functionGetPosts = (req, res) => {
 };
 
 
+//Insert new user
+const functionRegister = async (req, res) => {
+    const con = openConection();
+
+    const querySearch = "SELECT COUNT(*) FROM login WHERE username = (?);";
+    
+    con.query(querySearch, req.body.username, async (err, result) => {
+        if (err) throw err;
+        const userCount = result[0]['COUNT(*)'];
+        if (userCount > 0) {
+            return res.status(401).json({ message: 'Username already taken' });
+        } else {
+            const queryInsert = "INSERT INTO login(created_at, username, password) VALUES (?)";
+
+            let created_at = new Date();
+            const hashedPassword = await bcrypt.hash(req.body.password, 10);
+        
+            const values = [[created_at, req.body.username, hashedPassword ]];
+            
+            con.query(queryInsert, values, (err, result) => {
+                if (err) throw err;
+                res.status(201).json({ message: 'User registered successfully' });
+            });
+            con.end();
+        }
+    });
+};
+
+//Login and generate a token
+const functionLogin = async (req, res) => {
+    const con = openConection();
+
+    const querySearch = "SELECT *  FROM login WHERE username = (?);";
+
+    con.query(querySearch, req.body.username, async (err, result) => {
+        if (err) throw err;
+        const resultSize = result.length;
+        let user = '';
+        let storedPassword = '';
+        if (resultSize > 0) {
+            user = result[0]['username'];
+            storedPassword = result[0]['password'];
+        } else {
+            return res.status(401).json({ message: 'Invalid credentials' });
+        }
+        
+        if (user != req.body.username) {
+            return res.status(401).json({ message: 'User não existe' });
+        }
+
+        // Verify the password using bcrypt
+        const passwordMatch = await bcrypt.compare(req.body.password, storedPassword);
+
+        if (!passwordMatch) {
+            return res.status(401).json({ message: 'Passoword errada' });
+        }
+
+        // Create a JWT token with an expiration time (e.g., 1 hour)
+        const token = jwt.sign({ userId: user.id }, secretKey, { expiresIn: '1h' });
+        res.json({ token });
+    });
+    con.end();
+};
+
+
+
+
 
 //só podemos ter um export por ficheiro
 module.exports = {
@@ -110,5 +199,7 @@ module.exports = {
     functionUpdatePost,
     functionDeletePost,
     functionGetPost,
-    functionGetPosts
+    functionGetPosts,
+    functionRegister,
+    functionLogin
 };
