@@ -4,15 +4,181 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Projetos</title>
+
+    <!-- link Favicon -->
+    <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico" />
+
+    <!-- Bootstrap link CSS -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+    />
+
+    <!-- CSS link HomePage-->
+    <link rel="stylesheet" href="/assets/css/style.css" />
+
+    <!-- CSS link Partials-->
+    <link rel="stylesheet" href="/pages/partials/partials.css" />
+
+    <!-- CSS link About-->
+    <!--  <link rel="stylesheet" href="/pages/about/about.css" /> -->
+
+    <!-- CSS link CV-->
+    <!--     <link rel="stylesheet" href="/pages/cv/cv.css" /> -->
+
+    <!-- CSS link Projects-->
+    <link rel="stylesheet" href="/pages/projects/projects.css" />
+
+    <!-- Link Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Dosis&family=Lato&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Script para editor de texto -->
+    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
+
+    <!-- Bootstrap link JavaScript  -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
   </head>
 
   <body>
     <!-- header -->
+    <!-- Objeto para importar header -->
+    <my-header></my-header>
 
-    <!-- navbar options: sobre mim, currículo, projetos, blog, contato -->
+    <br />
 
-    <!-- descrição de projetos profissionais com texto e imagens -->
+    <!-- experiência profissional, educação, especializações -->
 
-    <!-- footer with social media icons -->
+    <section>
+      <div class="container">
+        <div class="row">
+          <h1 class="col-12 title">Os meus Projetos</h1>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-9">
+            <div class="text">
+              <h2 class="titles">Projeto A</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Eu nibh nibh nunc at id massa eget aenean accumsan. Morbi turpis
+                mattis pellentesque neque odio. Nulla luctus viverra aliquam
+                lectus euismod posuere nibh consequat. Nibh eget ipsum fermentum
+                turpis elit. Eget volutpat sed varius sed bibendum. Egestas et
+                ac gravida lacus. Ipsum lectus eu risus id non facilisi faucibus
+                donec. In dolor eu id eget. Enim est et id in quam.
+              </p>
+              <div class="buttons-container">
+                <input class="button" type="submit" value="Ver mais" />
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-3 d-flex align-items-center justify-content-center"
+          >
+            <div class="circular-image-wrapper">
+              <img
+                src="/assets/img/laptop.png"
+                class="circular-image"
+                alt="laptop"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-md-9">
+            <div class="text">
+              <h2 class="titles">Projeto B</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Eu nibh nibh nunc at id massa eget aenean accumsan. Morbi turpis
+                mattis pellentesque neque odio. Nulla luctus viverra aliquam
+                lectus euismod posuere nibh consequat. Nibh eget ipsum fermentum
+                turpis elit. Eget volutpat sed varius sed bibendum. Egestas et
+                ac gravida lacus. Ipsum lectus eu risus id non facilisi faucibus
+                donec. In dolor eu id eget. Enim est et id in quam.
+              </p>
+              <div class="buttons-container">
+                <input class="button" type="submit" value="Ver mais" />
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-3 d-flex align-items-center justify-content-center"
+          >
+            <div class="circular-image-wrapper">
+              <img
+                src="/assets/img/code.png"
+                class="circular-image"
+                alt="laptop"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row mb-5">
+          <div class="col-12 col-md-9">
+            <div class="text">
+              <h2 class="titles">Projeto C</h2>
+              <p>
+                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
+                enim ad minim veniam, quis nostrud exercitation ullamco laboris
+                nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor
+                in reprehenderit in voluptate velit esse cillum dolore eu fugiat
+                nulla pariatur. Excepteur sint occaecat cupidatat non proident,
+                sunt in culpa qui officia deserunt mollit anim id est laborum.
+                Eu nibh nibh nunc at id massa eget aenean accumsan. Morbi turpis
+                mattis pellentesque neque odio. Nulla luctus viverra aliquam
+                lectus euismod posuere nibh consequat. Nibh eget ipsum fermentum
+                turpis elit. Eget volutpat sed varius sed bibendum. Egestas et
+                ac gravida lacus. Ipsum lectus eu risus id non facilisi faucibus
+                donec. In dolor eu id eget. Enim est et id in quam.
+              </p>
+              <div class="buttons-container">
+                <input class="button" type="submit" value="Ver mais" />
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-12 col-md-3 d-flex align-items-center justify-content-center"
+          >
+            <div class="circular-image-wrapper">
+              <img
+                src="/assets/img/desk.png"
+                class="circular-image"
+                alt="laptop"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Objeto para importar footer -->
+    <my-footer></my-footer>
+    <script src="./../partials/partials.js"></script>
   </body>
 </html>
