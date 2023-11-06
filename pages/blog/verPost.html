@@ -36,38 +36,109 @@
 
   <body>
     <my-header></my-header>
-    <section class="page">
+    <section id="post" class="container hide-post">
         <div class="title-buttons-container">
-            <h1 class="titles">Lorem ipsum dolor sit amet, consectetur </h1>
-            <div class="buttons-container">
-                <input  class="button" type="button" value="Editar Post">
-                <input  class="button" type="button" value="Apagar Post">
+            <h1 id ="title" class="titles">$title</h1>
+            <div id="buttons-login" class="buttons-container">
+                <input id="edit-button" class="button" type="button" value="Editar Post">
+                <input id="delete-button" class="button" type="button" value="Apagar Post" data-toggle="modal" data-target="#exampleModalCenter">
             </div>
         </div>
         <div>
-            <p class="data">2023-10-20</p>
-            <div class="texto">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <p id ="date" class="data">$date</p>
+            <div id ="text" class="texto">$text</div>
+        </div>
+    </section>
+    <section>        
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">AVISO</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <p>Tem certeza de que deseja apagar este post? Esta ação não pode ser desfeita.</p>
+                </div>
+                <div  class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button id="agree-delete" type="button" class="btn btn-danger">Apagar Post</button>
+                </div>
+            </div>
             </div>
         </div>
-             
     </section>
     <my-footer></my-footer>
     <script src="./../partials/partials.js"></script>
-  </body>
+    <script src="./../../services/postService.js"></script>
     <script>
-        ClassicEditor
-            .create( document.querySelector( '#editor' ) )
-            .then(res => {
-                console.log(res);
-                document.querySelector('input[type=reset]').addEventListener('click', () => {
-                    res.data.set('');
-                })
+        const postSection = document.querySelector("#post");
+
+        const queryString = window.location.search;
+
+        const urlParams = new URLSearchParams(queryString);
+
+        const id = urlParams.get("id");
+
+        getPost(id).then((postArray) => {
+            if (postArray.length > 0) {
+                const post = postArray[0]
+                const dataHora = post.created_at;
+                const options = {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                };
+
+                const dataHoraFormatada = new Date(dataHora).toLocaleString('pt-PT', options);
+
+                document.getElementById("title").textContent = post.title;
+                document.getElementById("date").textContent = dataHoraFormatada;
+                document.getElementById("text").innerHTML = post.text;
+
+                postSection.classList.remove('hide-post');
+            } else {
+                console.error("Post do not exist");
+            }
+        });
+
+        document.querySelector('#edit-button').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            const title = document.getElementById("title").value;
+            const text = document.getElementById("text").value;
+
+            window.location.href = `criarPost.html?id=${id}`; 
+        });
+
+        document.querySelector('#delete-button').addEventListener('click', async (event) => {
+            event.preventDefault();
+
+            $('#myModal').on('shown.bs.modal', () => {
+                $('#myInput').trigger('focus')
             })
-            .catch(error => {
-                console.error( error );
-            } );
-    </script>
+
+            document.querySelector('#agree-delete').addEventListener('click', async (event) => {
+                event.preventDefault();
+
+                await deletePost(id);
+                window.location.href = `blog.html`;
+            });
+        });
+
+        const token = localStorage.getItem('token');
+
+        const buttonsLogin = document.getElementById("buttons-login");
+
+        if (token == null) {
+            buttonsLogin.style.display = "none";
+        } else {
+            buttonsLogin.style.display = "block";
+        }
+
+      </script>
+  </body>
 </html>

@@ -20,19 +20,34 @@ class Header extends HTMLElement {
                 <div id="navb" class="navbar-collapse collapse hide">
                     <ul class="navbar-nav ">
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Currículo</a>
+                            <a class="nav-link nav-link-custom" href="/pages/cv/cv.html">Currículo</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Projetos</a>
+                            <a class="nav-link nav-link-custom" href="/pages/projects/projects.html">Projetos</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Blog</a>
+                            <a class="nav-link nav-link-custom" href="/pages/blog/blog.html">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#">Contato</a>
+                            <a class="nav-link nav-link-custom" href="/pages/contacts/contacts.html">Contato</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-custom" href="#"><span class="fas fa-user user"></span>Login</a>
+                            <div class="dropdown">
+                                <button class="btn dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="fas fa-user user">
+                                </button>
+                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu2">
+                                    <a href= "/pages/login/login.html">
+                                        <button id="login-button" class="dropdown-item" type="button">Login</button>
+                                    </a>
+                                    <a href= "index.html">
+                                        <button id="logout-button" class="dropdown-item" type="button" action="/logout"  method="POST">Sair</button>
+                                    </a>
+                                    <a href= "/pages/blog/criarPost.html">
+                                        <button id="createPost-button" class="dropdown-item" type="button">Criar novo post</button>
+                                    </a>
+                                </div>
+                            </div>
                         </li>
                     </ul>
                 </div>
@@ -40,6 +55,32 @@ class Header extends HTMLElement {
         </header>
     `;
     this.innerHTML = template;
+
+    const token = localStorage.getItem('token');
+
+    const logoutButton = document.getElementById("logout-button");
+    const loginButton = document.getElementById("login-button");
+    const createPostButton = document.getElementById("createPost-button");
+
+    if (token == null) {
+        loginButton.style.display = "flex";
+        logoutButton.style.display = "none";
+        createPostButton.style.display = "none";
+    } else {
+        loginButton.style.display = "none";
+        logoutButton.style.display = "flex";
+        createPostButton.style.display = "flex";
+    }
+    
+    document.querySelector('#logout-button').addEventListener('click', async (event) => {
+        event.preventDefault();
+
+        localStorage.removeItem('token');
+        logoutButton.style.display = "none";
+        loginButton.style.display = "flex";
+        createPostButton.style.display = "none";
+        window.location.href = `../../index.html`;
+    });
   }
 }
 
@@ -76,5 +117,90 @@ class Footer extends HTMLElement {
   }
 }
 
+
+class Post extends HTMLElement {
+  get id() {
+    return this.hasAttribute("id") && this.getAttribute("id");
+  }
+  get title() {
+    return this.hasAttribute("title") && this.getAttribute("title");
+  }
+  get date() {
+    return this.hasAttribute("date") && this.getAttribute("date");
+  }
+  get text() {
+    return this.hasAttribute("text") && decodeHTML(this.getAttribute("text"));
+  }
+  get image() {
+    return this.hasAttribute("image") && this.getAttribute("image") != "undefined" && this.getAttribute("image");
+  }
+
+  constructor() {
+    super();
+
+    const dataHora = this.date;
+
+    const options = {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit',
+    };
+
+    const dataHoraFormatada = new Date(dataHora).toLocaleString('pt-PT', options);
+    const hasToken = localStorage.getItem('token');
+    
+    // Começo
+    let template = '<div class="row">';
+
+    // Imagem
+    if (this.image) {
+      template += `
+        <div class="col-12 col-md-4">
+            <div class="card border-0">
+            <div class="card-body">
+                <img
+                class="card-img-top mb-3"
+                src="${this.image}"
+                alt="Post main image"
+                />
+            </div>
+            </div>
+        </div>
+      `;
+    }
+
+    // Conteudo
+    template += `
+        <div class="col-12 ${this.image ? "col-md-8" : ""}">
+            <div class="card border-0">
+            <div class="card-body">
+                <a href= "verPost.html?id=${this.id}">
+                    <h3 class="titles">${this.title}</h3>
+                </a>
+                ${hasToken ?
+                    `<div class="buttons-container">
+                        <a href= "criarPost.html?id=${this.id}">
+                            <input id="edit-button" class="button" type="button" value="Editar Post" />
+                        </a>
+                    </div>` : ''
+                }
+                <p class="data">${dataHoraFormatada}</p>
+                <div class="card-text">${this.text}</div>
+                <a href= "verPost.html?id=${this.id}">
+                    <button type="button" class="btn btn-link">Ver Mais</button>
+                </a>
+            </div>
+            </div>
+        </div>
+    `;
+
+    // Fim
+    template += "</div>";
+
+    this.innerHTML = template;
+  }
+}
+
 customElements.define("my-header", Header);
 customElements.define("my-footer", Footer);
+customElements.define("my-post", Post);

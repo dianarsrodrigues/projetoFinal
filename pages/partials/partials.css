@@ -18,7 +18,7 @@ a:hover {
     color: rgb(126, 121, 121) ;
 }
 
-.brand-name, brand-function {
+.brand-name, .brand-function {
     padding: 20px;
 }
 
@@ -64,12 +64,24 @@ a:hover {
     padding-right: 15px;
 }
 
+button {
+    background-color: white;
+}
+
+#logout-button {
+    color: red;
+}
+
 @media only screen and (max-width: 768px) {
     .navbar-nav {
         position: static;
     }
 
-    .subtitle {
+    .nav-item {
+        border-right: none;
+    }
+
+    .brand-function {
         display: none;
     }
 
