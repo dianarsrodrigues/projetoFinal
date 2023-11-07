@@ -8,7 +8,6 @@ const getPosts = async () => {
   } else {
     console.error("Something went wrong");
   }
-
   return [];
 };
 
@@ -20,7 +19,6 @@ const getPost = async (id) => {
   } else {
     console.error("Post not exist");
   }
-
   return null;
 };
 
@@ -64,6 +62,21 @@ const deletePost = async (id) => {
   }
   return null;
 };
+
+const sendMailNotification = async (firstName, lastName, email, subject, message) => {
+  const headers = {'Content-Type': 'application/json'}
+  const body = JSON.stringify({ firstName, lastName, email, subject, message });
+  const response = await fetch(URL + "contacts", { method: 'POST', headers, body });
+  if (response.ok) {
+    const result = await response.json();
+    return result;
+  } else {
+    console.error("Something went wrong");
+  }
+  return null;
+};
+
+
 
 
 
