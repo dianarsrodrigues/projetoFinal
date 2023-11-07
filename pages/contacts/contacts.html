@@ -1,135 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sobre mim</title>
 
-    <!-- Favicon  -->
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sobre mim</title>
 
-    <!-- Bootstrap link CSS -->
-    <link
-      rel="stylesheet"
-      href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
-      integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU"
-      crossorigin="anonymous"
-    />
-    <link
-      rel="stylesheet"
-      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
-    />
+  <!-- Favicon  -->
 
-    <!-- CSS link HomePage-->
-    <link rel="stylesheet" href="./../../assets/css/style.css" />
+  <!-- Bootstrap link CSS -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 
-    <!-- CSS link Partials-->
-    <link rel="stylesheet" href="./../partials/partials.css" />
+  <!-- CSS link HomePage-->
+  <link rel="stylesheet" href="./../../assets/css/style.css" />
 
-    <!-- CSS link Blog-->
-    <link rel="stylesheet" href="./blog.css" />
+  <!-- CSS link Partials-->
+  <link rel="stylesheet" href="./../partials/partials.css" />
 
-    <!-- Link Google Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Dosis&family=Lato&display=swap"
-      rel="stylesheet"
-    />
+  <!-- Link Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Dosis&family=Lato&display=swap"
+    rel="stylesheet" />
 
-    <!-- Script para editor de texto -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
+  <!-- Script para editor de texto -->
+  <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
 
-    <!-- Bootstrap link JavaScript  -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
-  </head>
+  <!-- Bootstrap link JavaScript  -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script>
+</head>
 
-  <body>
-    <section class="page">
-      <!-- header -->
-      <!-- Objeto para importar header -->
-      <my-header></my-header>
+<body>
+  <my-header></my-header>
+  <section class="page">
+    <!-- header -->
+    <!-- Objeto para importar header -->
 
-      <div class="container">
-        <h2 class="titles">Contato</h2>
-        <p>Entre em contato comigo para conversarmos sobre o seu projeto!</p>
-        <br />
 
-        <div class="row">
-          <div class="col-md-3">
-            <div style="text-align: left">
-              <img src="/assets/img/chat.png" alt="chat icon" width="200" />
-            </div>
+    <div class="container">
+      <h2 class="titles">Contato</h2>
+      <p>Entre em contato comigo para conversarmos sobre o seu projeto!</p>
+      <br />
+
+      <div class="row">
+        <div class="col-md-3">
+          <div style="text-align: left">
+            <img src="/assets/img/chat.png" alt="chat icon" width="200" />
           </div>
-          <div class="col-md-9">
-            <form>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <div class="form-group col-md-12">
-                    <label class="titles">Nome*</label>
-                    <input
-                      type="nome"
-                      class="form-control"
-                      id="inputFirstName"
-                    />
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <div class="form-group col-md-12">
-                    <label class="titles">Apelido</label>
-                    <input
-                      type="apelido"
-                      class="form-control"
-                      id="inputLastName"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="form-row">
-                <div class="form-group col-md-6">
-                  <div class="form-group col-md-12">
-                    <label class="titles">E-mail*</label>
-                    <input
-                      type="email"
-                      class="form-control"
-                      id="inputEmail"
-                      placeholder="mail@mail.com"
-                    />
-                  </div>
-                </div>
-                <div class="form-group col-md-6">
-                  <div class="form-group col-md-12">
-                    <label class="titles">Assunto*</label>
-                    <input
-                      type="assunto"
-                      class="form-control"
-                      id="inputMessageTitle"
-                    />
-                  </div>
-                </div>
-              </div>
-              <div class="form-group">
+        </div>
+        <div class="col-md-9">
+          <form>
+            <div class="form-row">
+              <div class="form-group col-md-6">
                 <div class="form-group col-md-12">
-                  <label class="titles">Mensagem*</label>
-                  <textarea
-                    class="form-control"
-                    id="textArea"
-                    rows="3"
-                  ></textarea>
-                </div>
-                <div class="buttons-container">
-                  <input class="button" type="reset" value="Limpar" />
-                  <input class="button" type="submit" value="Submeter" />
+                  <label class="titles">Nome*</label>
+                  <input type="text" class="form-control" id="firstName" required />
                 </div>
               </div>
-            </form>
+              <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
+                  <label class="titles">Apelido</label>
+                  <input type="text" class="form-control" id="lastName" />
+                </div>
+              </div>
+            </div>
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
+                  <label class="titles">E-mail*</label>
+                  <input type="email" class="form-control" id="email" placeholder="mail@mail.com" required />
+                </div>
+              </div>
+              <div class="form-group col-md-6">
+                <div class="form-group col-md-12">
+                  <label name="subject" class="titles">Assunto*</label>
+                  <input type="text" class="form-control" id="subject" required />
+                </div>
+              </div>
+            </div>
+            <div class="form-group">
+              <div class="form-group col-md-12">
+                <label class="titles">Mensagem*</label>
+                <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
+              </div>
+              <div class="buttons-container">
+                <input class="button" type="reset" value="Limpar" />
+                <input id="submit" class="button" type="submit" value="Submeter" />
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">AVISO</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Mensagem enviada com sucesso!</p>
           </div>
         </div>
       </div>
-    </section>
-    <!-- Objeto para importar footer -->
-    <my-footer></my-footer>
-    <script src="./../partials/partials.js"></script>
-  </body>
+    </div>
+  </section>
+  <!-- Objeto para importar footer -->
+  <my-footer></my-footer>
+  <script src="./../partials/partials.js"></script>
+  <script src="./../../services/postService.js"></script>
+  <script>
+
+    document.querySelector('#submit').addEventListener('click', (event) => {
+      event.preventDefault();
+      
+      const firstName = document.getElementById("firstName").value;
+      const lastName = document.getElementById("lastName").value;
+      const email = document.getElementById("email").value;
+      const subject = document.getElementById("subject").value;
+      const message = document.getElementById("message").value;
+
+      if (!firstName || !email || !subject || !message) {
+        alert('Por favor, preencha todos os campos obrigatórios.');
+        return;
+      }
+
+      sendMailNotification(firstName, lastName, email, subject, message);
+      $('#myModal').modal('show');
+
+      
+
+    });
+  </script>
+</body>
+
 </html>

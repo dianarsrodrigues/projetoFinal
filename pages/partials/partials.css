@@ -32,7 +32,7 @@ a:hover {
 
 .navbar-nav {
     right: 0;
-    position: absolute;
+    
 }
 
 .nav-item {
@@ -57,6 +57,9 @@ a:hover {
 @media only screen and (max-width: 1000) {
     .nav-item {
         padding: 0 10px;
+    }
+    .nav-link-custom:hover {
+        border-bottom: none;
     }
 }
 

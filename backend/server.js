@@ -2,7 +2,10 @@ const express = require("express");
 const cors = require("cors");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const nodemailer = require("nodemailer");
 // const bodyParser = require('body-parser');
+const dotenv = require('dotenv');
+dotenv.config(); // Carrega variáveis de ambiente do arquivo .env
 
 const app = express();
 const PORT = 3000;
@@ -73,9 +76,40 @@ app.post('/login', sqlUtils.functionLogin);
 //     },
 //   ]);
 // });
+    
 
+const transporter = nodemailer.createTransport({
+  service: 'outlook.com',
+  auth: {
+    user: process.env.EMAIL_USER,
+    pass: process.env.EMAIL_PASSWORD,
+  }
+});
 
+app.post('/contacts', (req, res) => {
+  const firstName = req.body.firstName;
+  const lastName = req.body.lastName;
+  const email = req.body.email;
+  const subject = req.body.subject;
+  const message = req.body.message;
 
+  const mailOptions = {
+    from: 'teste12356@outlook.pt',
+    to: 'teste12356@outlook.pt',
+    subject: subject,
+    text: `Nome: ${firstName} ${lastName} \nEmail: ${email} \n\nMensagem: ${message}`
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+      res.status(500).json({ message: 'Erro ao enviar o e-mail' });
+    } else {
+      console.log('E-mail enviado: ' + info.response);
+      res.json({ message: 'E-mail enviado com sucesso' });
+    }
+  });
+});
 
 app.listen(PORT, (err) => {
   if (err) console.log("Error in server setup");
