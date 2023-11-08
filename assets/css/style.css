@@ -8,6 +8,23 @@ body{
 
 }
 
+html, body {
+    height: 80vh;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.container {
+    flex: 1 0 auto;
+}
+
+footer {
+    flex-shrink: 0;
+}
+
 .page {
     margin: 50px 10% 30px;
     max-width: 1200px;
