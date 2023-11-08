@@ -7,6 +7,7 @@ const nodemailer = require("nodemailer");
 const dotenv = require('dotenv');
 dotenv.config(); // Carrega variáveis de ambiente do arquivo .env
 
+
 const app = express();
 const PORT = 3000;
 
@@ -40,13 +41,27 @@ app.get("/post/:id", sqlUtils.functionGetPost);
 //Get Blog
 app.get("/posts", sqlUtils.functionGetPosts);
 
-// Autentication ---------------------------
-
-//Insert new user
-app.post('/register', sqlUtils.functionRegister);
-
  // Login and generate a token
 app.post('/login', sqlUtils.functionLogin);
+
+app.post('/uploads', (req, res) => {
+
+  if (!req.files || !req.files.file) {
+    return res.status(400).json({ error: 'Nenhum arquivo enviado' });
+  }
+
+  const uploadedFile = req.files.file;
+
+  const destinationPath = '/uploads/' + uploadedFile.name;
+
+  uploadedFile.mv(destinationPath, (err) => {
+    if (err) {
+      return res.status(500).json({ error: 'Falha ao salvar o arquivo' });
+    }
+
+    res.status(200).send('Arquivo enviado com sucesso');
+  });
+});
 
 
 // app.get("/posts", (req, res) => {

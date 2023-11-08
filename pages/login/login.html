@@ -33,7 +33,7 @@
 
   <body>
     <my-header></my-header>
-    <section class="">
+    <section class="container">
         <div class="login-page">
             <div class="form">
                 <div class="user-icon">
@@ -45,18 +45,10 @@
                         <span aria-hidden="true">&times</span>
                     </button>
                 </div>
-              <form id="registrationForm" class="register-form">
-                <input id="registerUsername" type="text" placeholder="username"/>
-                <input  id="registerPassword" type="password" placeholder="password"/>
-                <input  id="registerPassword-copy" type="password" placeholder="Repeat password"/>
-                <button type="submit">Criar</button>
-                <p class="message">Already registered? <a href="#">Sign In</a></p>
-              </form>
               <form id="loginForm" class="login-form">
                 <input id="loginUsername" type="text" placeholder="username"/>
                 <input id="loginPassword" type="password" placeholder="password"/>
                 <button type="submit">login</button>
-                <p class="message">Not registered? <a href="#">Create an account</a></p>
               </form>
             </div>
           </div>
@@ -70,42 +62,7 @@
         $('form').animate({height: "toggle", opacity: "toggle"}, "slow");
         });
 
-        const registrationForm = document.getElementById('registrationForm');
         const loginForm = document.getElementById('loginForm');
-
-        registrationForm.addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const username = document.getElementById('registerUsername').value;
-            const password = document.getElementById('registerPassword').value;
-            const password_copy = document.getElementById('registerPassword-copy').value;
-            const errorBox = document.querySelector("#error"); 
-            const errorCloseButton = errorBox.querySelector(".close"); 
-
-            if (password == password_copy) {
-                // Send a POST request to the registration endpoint
-                const response = await fetch('http://localhost:3000/register', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ username, password }),
-                });
-
-                const data = await response.json();
-                console.log(data.message);
-                document.querySelector("#error-text").textContent =  data.message;
-                errorBox.style.display = "flex";
-                
-                errorCloseButton.addEventListener("click", function () {
-                    errorBox.style.display = "none";
-                });
-            } else {
-                document.querySelector("#error-text").textContent = 'Password errada';
-                errorBox.style.display = "flex";
-                
-                errorCloseButton.addEventListener("click", function () {
-                    errorBox.style.display = "none";
-                });
-            }
-        });
 
         loginForm.addEventListener('submit', async (event) => {
             event.preventDefault();

@@ -1,6 +1,6 @@
 .login-page {
     width: 360px;
-    padding: 8% 0 0;
+    padding: 6% 0 0;
     margin: auto;
 }
 
@@ -62,7 +62,6 @@
 .container {
     position: relative;
     z-index: 1;
-    max-width: 300px;
     margin: 0 auto;
 }
 

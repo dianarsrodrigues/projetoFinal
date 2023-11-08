@@ -33,3 +33,14 @@
     display: flex;
     flex-flow: row wrap;
   } */
+
+  #error {
+    display: none;
+    gap: 100px;
+     
+ }
+ 
+ #error-text {
+     display: contents; 
+     font-size: 18px;
+ }

@@ -115,7 +115,7 @@ const functionGetPost = (req, res) => {
 const functionGetPosts = (req, res) => {
     const con = openConection();
 
-    const querySearch = "SELECT * FROM post WHERE delete_at IS NULL;";
+    const querySearch = "SELECT * FROM post WHERE delete_at IS NULL ORDER BY id DESC;";
     
     con.query(querySearch, (err, result) => {
         if (err) throw err;
@@ -124,40 +124,11 @@ const functionGetPosts = (req, res) => {
     con.end();
 };
 
-
-//Insert new user
-const functionRegister = async (req, res) => {
-    const con = openConection();
-
-    const querySearch = "SELECT COUNT(*) FROM login WHERE username = (?);";
-    
-    con.query(querySearch, req.body.username, async (err, result) => {
-        if (err) throw err;
-        const userCount = result[0]['COUNT(*)'];
-        if (userCount > 0) {
-            return res.status(401).json({ message: 'Username already taken' });
-        } else {
-            const queryInsert = "INSERT INTO login(created_at, username, password) VALUES (?)";
-
-            let created_at = new Date();
-            const hashedPassword = await bcrypt.hash(req.body.password, 10);
-        
-            const values = [[created_at, req.body.username, hashedPassword ]];
-            
-            con.query(queryInsert, values, (err, result) => {
-                if (err) throw err;
-                res.status(201).json({ message: 'User registered successfully' });
-            });
-            con.end();
-        }
-    });
-};
-
 //Login and generate a token
 const functionLogin = async (req, res) => {
     const con = openConection();
 
-    const querySearch = "SELECT *  FROM login WHERE username = (?);";
+    const querySearch = "SELECT * FROM login WHERE username = (?);";
 
     con.query(querySearch, req.body.username, async (err, result) => {
         if (err) throw err;
@@ -168,7 +139,7 @@ const functionLogin = async (req, res) => {
             user = result[0]['username'];
             storedPassword = result[0]['password'];
         } else {
-            return res.status(401).json({ message: 'Invalid credentials' });
+            return res.status(401).json({ message: 'Credenciais inválidas' });
         }
         
         if (user != req.body.username) {
@@ -179,7 +150,7 @@ const functionLogin = async (req, res) => {
         const passwordMatch = await bcrypt.compare(req.body.password, storedPassword);
 
         if (!passwordMatch) {
-            return res.status(401).json({ message: 'Passoword errada' });
+            return res.status(401).json({ message: 'Password errada' });
         }
 
         // Create a JWT token with an expiration time (e.g., 1 hour)
@@ -200,6 +171,5 @@ module.exports = {
     functionDeletePost,
     functionGetPost,
     functionGetPosts,
-    functionRegister,
     functionLogin
 };

@@ -26,8 +26,9 @@
     <link href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Dosis&family=Lato&display=swap" rel="stylesheet" />
 
     <!-- Script para editor de texto -->
-    <script src="https://cdn.ckeditor.com/ckeditor5/36.0.0/classic/ckeditor.js"></script>
+    <script src="https://cdn.ckeditor.com/ckeditor5/40.0.0/classic/ckeditor.js"></script>
 
+    <script src="https://cdn.jsdelivr.net/npm/@ckeditor/ckeditor5-ckfinder@40.0.0/src/index.min.js"></script>
     <!-- Bootstrap link JavaScript  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -36,7 +37,13 @@
 
   <body>
     <my-header></my-header>
-    <section class="page">
+    <section class="container">
+        <div id="error" class="alert alert-danger" role="alert">
+            <span id="error-text"></span>
+            <button class="button-error close" type="button" aria-label="Close">
+                <span aria-hidden="true">&times</span>
+            </button>
+        </div>
         <form id="texto-form">
             <input type="text" id="title" placeholder="Inserir um título..." required >
             <div id="editor"></div>
@@ -50,6 +57,7 @@
     <my-footer></my-footer>
     <script src="./../partials/partials.js"></script>
     <script src="./../../services/postService.js"></script>
+   
     <script>
 
         const queryString = window.location.search;
@@ -57,7 +65,12 @@
         const id = urlParams.get("id");
         
         const initEditor = async (value = '', defaultTitle = '') => {
-            const res = await ClassicEditor.create(document.querySelector('#editor'))
+            const res = await ClassicEditor.create(document.querySelector('#editor'), {
+                
+                ckfinder: {
+                    uploadUrl: '/uploads'
+                }
+            })
             if (res) {
                 res.data.set(value);
                 document.querySelector('#reset').addEventListener('click', () => {
@@ -74,8 +87,21 @@
 
                 const title = document.getElementById("title").value;
                 const text = editor.getData();
-                const response = id ? await updatePost(id, title, text) : await createPost(title, text);
+                const errorBox = document.querySelector("#error"); 
+                const errorCloseButton = errorBox.querySelector(".close"); 
 
+                if (!title || !text) {
+                    document.querySelector("#error-text").textContent = 'Por favor, preencha todos os campos obrigatórios.';
+                    errorBox.style.display = "flex";
+                    
+                    errorCloseButton.addEventListener("click", function () {
+                        errorBox.style.display = "none";
+                    });
+                    return;
+                }
+    
+                const response = id ? await updatePost(id, title, text) : await createPost(title, text);
+        
                 if (response) {
                     window.location.href = `verPost.html?id=${response.id || id}`;
                 }

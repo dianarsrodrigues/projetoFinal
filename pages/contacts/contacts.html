@@ -19,6 +19,9 @@
   <!-- CSS link Partials-->
   <link rel="stylesheet" href="./../partials/partials.css" />
 
+  <!-- CSS link Partials-->
+  <link rel="stylesheet" href="./../contacts/contacts.css" />
+
   <!-- Link Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -36,7 +39,7 @@
 
 <body>
   <my-header></my-header>
-  <section class="page">
+  <section class="container">
     <!-- header -->
     <!-- Objeto para importar header -->
 
@@ -53,6 +56,12 @@
           </div>
         </div>
         <div class="col-md-9">
+          <div id="error" class="alert alert-danger" role="alert">
+            <span id="error-text"></span>
+            <button class="button-error close" type="button" aria-label="Close">
+                <span aria-hidden="true">&times</span>
+            </button>
+          </div>
           <form>
             <div class="form-row">
               <div class="form-group col-md-6">
@@ -127,9 +136,16 @@
       const email = document.getElementById("email").value;
       const subject = document.getElementById("subject").value;
       const message = document.getElementById("message").value;
+      const errorBox = document.querySelector("#error"); 
+      const errorCloseButton = errorBox.querySelector(".close"); 
 
       if (!firstName || !email || !subject || !message) {
-        alert('Por favor, preencha todos os campos obrigatórios.');
+        document.querySelector("#error-text").textContent =  'Por favor, preencha todos os campos obrigatórios.';
+          errorBox.style.display = "block";
+          
+          errorCloseButton.addEventListener("click", function () {
+              errorBox.style.display = "none";
+          });
         return;
       }
 
