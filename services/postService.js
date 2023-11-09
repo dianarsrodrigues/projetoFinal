@@ -26,6 +26,7 @@ const createPost = async (title, text) => {
   const token = localStorage.getItem('token')
   const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` }
   const body = JSON.stringify({ title, text });
+  // const body = formData;
   const response = await fetch(URL + "post/new", { method: 'POST', headers, body });
   if (response.ok) {
     const result = await response.json();
@@ -40,6 +41,7 @@ const updatePost = async (id, title, text) => {
   const token = localStorage.getItem('token')
   const headers = { 'Accept': 'application/json', 'Content-Type': 'application/json', "Authorization": `Bearer ${token}` }
   const body = JSON.stringify({ title, text });
+  // const body = formData;
   const response = await fetch(URL + "post/update/" + id, { method: 'POST', headers, body });
   if (response.ok) {
     const result = await response.json();
@@ -69,6 +71,21 @@ const sendMailNotification = async (firstName, lastName, email, subject, message
   const response = await fetch(URL + "contacts", { method: 'POST', headers, body });
   if (response.ok) {
     const result = await response.json();
+    return result;
+  } else {
+    console.error("Something went wrong");
+  }
+  return null;
+};
+
+const uploadImage = async (formData) => {
+  // const headers = {'Content-Type': `multipart/form-data; boundary=${formData.getBoundary()}`};
+  const body = formData;
+  const response = await fetch(URL + "uploadImage", { method: 'POST', body });
+  console.log("dsdssssss", response);
+  if (response.ok) {
+    const result = await response.json();
+    console.log("ssssssaaaa", result);
     return result;
   } else {
     console.error("Something went wrong");
