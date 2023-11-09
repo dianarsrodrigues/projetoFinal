@@ -2,8 +2,9 @@ const express = require("express");
 const cors = require("cors");
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const multer = require('multer'); //upload das imagens
 const nodemailer = require("nodemailer");
-// const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 const dotenv = require('dotenv');
 dotenv.config(); // Carrega variáveis de ambiente do arquivo .env
 
@@ -12,7 +13,8 @@ const app = express();
 const PORT = 3000;
 
 app.use(cors());
-app.use(express.json());
+app.use(express.json({limit: '50mb'}));
+app.use(bodyParser())
 app.use(
   express.urlencoded({
     extended: true,
@@ -125,6 +127,40 @@ app.post('/contacts', (req, res) => {
     }
   });
 });
+
+// Configuração do Multer para o armazenamento de arquivos
+const storage = multer.diskStorage({
+  destination: (req, file, callback) => {
+    callback(null, 'uploads/'); // Pasta onde os arquivos serão armazenados
+    console.log("entrou3");
+  },
+  filename: (req, file, callback) => {
+    callback(null, file.originalname); // Use o nome original do arquivo
+    console.log("entrou4");
+  },
+});
+
+const upload = multer({ storage: storage });
+
+app.post('/uploadImage', upload.single('file'), (req, res) => {
+  if (!req.file) {
+    console.log("No file received");
+    return res.send({
+      success: false
+    });
+
+  } else {
+    console.log('file received');
+    return res.send({
+      success: true
+    })
+  }
+});
+
+
+
+
+
 
 app.listen(PORT, (err) => {
   if (err) console.log("Error in server setup");
