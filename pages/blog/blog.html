@@ -46,11 +46,14 @@
   <script src="./../../services/postService.js"></script>
   <script src="./../../services/utils.js"></script>
   <script>
+  
+
     const postsSection = document.querySelector("#posts");
 
     getPosts().then((posts) =>
       posts.forEach((post) => {
-        postsSection.innerHTML += `<my-post id="${post.id}" title="${post.title}" text="${encodeHTML(post.text)}" date="${post.created_at}" image="${post.image}"></my-post>`;
+        const image = getFirstImage(post.text);
+        postsSection.innerHTML += `<my-post id="${post.id}" title="${post.title}" text="${encodeHTML(post.text)}" date="${post.created_at}" image="${image}"></my-post>`;
       })
     );
 

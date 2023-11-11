@@ -19,9 +19,8 @@ const openConection = () => {
 };
 
 const verifyToken = (req, res) => {
-    let token = req.headers.authorization;
+    const token = req.headers.authorization;
 
-    token = token.replace("Bearer ", "");
     if (!token) {
         return res.status(401).json({ message: 'Token missing' });
     }
@@ -31,12 +30,16 @@ const verifyToken = (req, res) => {
         return res.status(401).json({ message: 'Invalid token' });
         }
     });
+
+    return true;
 }
 
 //Inserir Post
 const functionInsertPost = (req, res) => {
-    verifyToken(req, res);
-    console.log("criarPost")
+    if (verifyToken(req, res) != true) {
+        return;
+    }
+    
     const con = openConection();
     
     const queryInsert = "INSERT INTO post(created_at, edited_at, delete_at, title, text) VALUES (?)";
@@ -55,7 +58,11 @@ const functionInsertPost = (req, res) => {
 
 //Update Post
 const functionUpdatePost = (req, res) => {
-    verifyToken(req, res);
+    
+    if (verifyToken(req, res) != true) {
+        return;
+    }
+
     const con = openConection();
     
     const queryUpdate = "UPDATE post SET edited_at = ?, title = ?, text= ? WHERE id = ?;";
@@ -78,7 +85,11 @@ const functionUpdatePost = (req, res) => {
 
 //Delete Post
 const functionDeletePost = (req, res) => {
-    verifyToken(req, res);
+    
+    if (verifyToken(req, res) != true) {
+        return;
+    }
+
     const con = openConection();
     // const queryDelete = "DELETE FROM post WHERE id = (?)";
 

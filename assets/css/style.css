@@ -83,3 +83,11 @@ input {
 @media only screen and (max-width: 768px) {
     
 }
+
+.image-post {
+    max-width: 100%;
+}
+
+img {
+    max-width: 100%;
+}
