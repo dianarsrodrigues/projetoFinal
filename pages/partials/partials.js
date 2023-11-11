@@ -132,7 +132,7 @@ class Post extends HTMLElement {
     return this.hasAttribute("text") && decodeHTML(this.getAttribute("text"));
   }
   get image() {
-    return this.hasAttribute("image") && this.getAttribute("image") != "undefined" && this.getAttribute("image");
+    return this.hasAttribute("image") && this.getAttribute("image") != "null" && this.getAttribute("image");
   }
 
   constructor() {
@@ -148,6 +148,7 @@ class Post extends HTMLElement {
 
     const dataHoraFormatada = new Date(dataHora).toLocaleString('pt-PT', options);
     const hasToken = localStorage.getItem('token');
+    
     
     // Começo
     let template = '<div class="row">';
@@ -185,7 +186,7 @@ class Post extends HTMLElement {
                     </div>` : ''
                 }
                 <p class="data">${dataHoraFormatada}</p>
-                <div class="card-text">${this.text}</div>
+                <div class="card-text">${this.text.substring(0, this.text.indexOf(".") + 1)}</div>
                 <a href= "verPost.html?id=${this.id}">
                     <button type="button" class="btn btn-link">Ver Mais</button>
                 </a>
