@@ -57,10 +57,10 @@
             </button>
         </div>
         <form id="texto-form">
-            <input type="text" id="title" placeholder="Inserir um título..." required size="100" style="width: 100%;">
+            <input type="text" id="title" class="insert-title" placeholder="Inserir um título..." required size="100" style="width: 100%;">
             <div id="editor" ></div>
-            <div class="buttons-container">
-                <input id="reset" class="button" value="Cancelar">
+            <div class="buttons-container right">
+                <input id="reset" class="button" type="reset" value="Cancelar">
                 <input id="submit" class="button" type="submit" value="Publicar">
             </div>
         </form>
@@ -95,19 +95,15 @@
                 },
                 'image-tooltip': true,
                 'link-tooltip': true,
-                placeholder: 'Textttt',
+                placeholder: 'O texto do post começa aqui.',
                 theme: 'snow'
             });
             if (res) {
                 res.clipboard.dangerouslyPasteHTML(value);
-                // res.insertText(0, value);
                 document.querySelector('#reset').addEventListener('click', () => {
                     document.getElementById("title").value = defaultTitle;
-                    // res.root.innerHTML = value;
-                    // value = res.clipboard.convert(value)
-                    // res.setContents(value, 'silent');
                     res.clipboard.dangerouslyPasteHTML(value);
-                    window.location.href = `verPost.html?id=${id}`;
+                    window.location.href = `blog.html`;
                 })
                 return res;
             }
@@ -128,7 +124,7 @@
                 const errorCloseButton = errorBox.querySelector(".close"); 
                 
                 if (!title || !text) {
-                    document.querySelector("#error-text").textContent = 'Por favor, preencha todos os campos obrigatórios.';
+                    document.querySelector("#error-text").textContent = 'Por favor, preencha o título e adicione algumas palavras.';
                     errorBox.style.display = "flex";
                     
                     errorCloseButton.addEventListener("click", function () {

@@ -39,16 +39,11 @@
 
 <body>
   <my-header></my-header>
-  <section class="container">
-    <!-- header -->
-    <!-- Objeto para importar header -->
-
-
-    <div class="container">
-      <h2 class="titles">Contato</h2>
-      <p>Entre em contato comigo para conversarmos sobre o seu projeto!</p>
-      <br />
-
+  <section class="container container-contact">
+      <div class="">
+        <h2 class="title">Contato</h2>
+        <p>Entre em contato comigo para conversarmos sobre o seu projeto!</p>
+      </div>
       <div class="row">
         <div class="col-md-3">
           <div style="text-align: left">
@@ -96,7 +91,7 @@
                 <label class="titles">Mensagem*</label>
                 <textarea class="form-control" id="message" name="message" rows="3" required></textarea>
               </div>
-              <div class="buttons-container">
+              <div class="buttons-container right">
                 <input class="button" type="reset" value="Limpar" />
                 <input id="submit" class="button" type="submit" value="Submeter" />
               </div>
@@ -104,7 +99,6 @@
           </form>
         </div>
       </div>
-    </div>
     <!-- Modal -->
     <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered" role="document">
@@ -141,7 +135,7 @@
 
       if (!firstName || !email || !subject || !message) {
         document.querySelector("#error-text").textContent =  'Por favor, preencha todos os campos obrigatórios.';
-          errorBox.style.display = "block";
+          errorBox.style.display = "flex";
           
           errorCloseButton.addEventListener("click", function () {
               errorBox.style.display = "none";
