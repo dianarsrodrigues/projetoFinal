@@ -6,7 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sobre mim</title>
 
-  <!-- Favicon  -->
+  <!-- link Favicon -->
+  <link rel="icon" type="image/x-icon" href="/assets/favicon/favicon.ico" />
 
   <!-- Bootstrap link CSS -->
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
@@ -14,13 +15,13 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" />
 
   <!-- CSS link HomePage-->
-  <link rel="stylesheet" href="./../../assets/css/style.css" />
+  <link rel="stylesheet" href="/assets/css/style.css" />
 
   <!-- CSS link Partials-->
-  <link rel="stylesheet" href="./../partials/partials.css" />
+  <link rel="stylesheet" href="/pages/partials/partials.css" />
 
-  <!-- CSS link Blog-->
-  <link rel="stylesheet" href="./blog.css" />
+  <!-- CSS link About-->
+  <link rel="stylesheet" href="/pages/about/about.css" />
 
   <!-- Link Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -40,26 +41,37 @@
 <body>
   <my-header></my-header>
   <section class="container">
-    <section id="posts" class="container-post"></section>
+    <div class="row">
+      <div class="col profile-picture align-self-center">
+        <img id="profile-picture" src="foto_perfil.jpg" alt="Profile Picture" />
+      </div>
+      <div class="col about-me-text">
+        <h1 class="title about-me-title">Olá!</h1>
+        <h3 class="about-me-subtitle">Sobre mim</h3>
+        <p>
+          Chamo-me Joana, tenho 26 anos e em Março de 2022 terminei o curso de
+          Software Development através do CESAE Digital. Desenvolvo websites
+          em WordPress desde Abril de 2022.
+        </p>
+        <p>
+          Gosto de desenvolver websites e de aprender novas tecnologias
+          relacionadas com o mundo da programação.
+        </p>
+        <p>
+          De momento estou a tirar uma Licenciatura em Engenharia Informática
+          e Computação na Faculdade de Engenharia da Universidade do Porto.
+        </p>
+        <p>
+          Nos meus tempos livres, gosto de aprofundar os meus conhecimentos
+          desenvolvendo websites front-end com HTML, CSS e JavaScript.
+        </p>
+      </div>
+    </div>
   </section>
+
+  <!-- Objeto para importar footer -->
   <my-footer></my-footer>
-
   <script src="./../partials/partials.js"></script>
-  <script src="./../../services/postService.js"></script>
-  <script src="./../../services/utils.js"></script>
-  <script>
-  
-
-    const postsSection = document.querySelector("#posts");
-
-    getPosts().then((posts) =>
-      posts.forEach((post) => {
-        const image = getFirstImage(post.text);
-        postsSection.innerHTML += `<my-post id="${post.id}" title="${post.title}" text="${encodeHTML(post.text)}" date="${post.created_at}" image="${image}"></my-post>`;
-      })
-    );
-
-  </script>
 </body>
 
 </html>
