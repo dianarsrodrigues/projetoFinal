@@ -1,10 +1,11 @@
 body {
     font-family: 'Dosis', sans-serif;
-    font-size: 18px;
+    font-size: 16px;
     line-height: 120%;
     letter-spacing: -0.63px;
     display: flex;
     flex-direction: column;
+    text-align: justify;
 }
 
 html,
@@ -12,7 +13,6 @@ body {
     height: 85vh;
 }
     
-
 .container {
     flex: 1 0 auto;
     place-items: flex-start;
@@ -24,7 +24,7 @@ body {
 }
 
 .row {
-    padding: 0;
+    padding: 20px 0;
 }
 
 footer {
@@ -40,10 +40,6 @@ footer {
 .icons {
     padding: 5px;
     width: 33px;
-}
-
-.text {
-    text-align: justify;
 }
 
 .buttons-container {
@@ -137,18 +133,6 @@ input {
     padding-top: 15px;
 }
 
-@media only screen and (max-width: 768px) {
-    .circular-image-wrapper {
-        width: 50%;
-        padding-bottom: 50%;
-        
-    }
-
-    .custom-align-mobile {
-        justify-content: center !important;
-    }
-}
-
 .circular-image {
     position: absolute;
     top: 50%;
@@ -158,8 +142,21 @@ input {
     object-fit: cover;
 }
 
-/* Blog  */
+/* Projects - mobile */
+@media only screen and (max-width: 768px) {
+    .circular-image-wrapper {
+        width: 50%;
+        padding-bottom: 50%;
+    }
 
+    .custom-align-mobile {
+        justify-content: center !important;
+    }
+}
+
+
+
+/* Blog Page*/
 .container-post {
     display: block;
     padding-top: 20px;
@@ -188,51 +185,67 @@ input {
     right: 15px;
 }
 
-
 .data {
     font-size: 18px;
     border-top: 0.5px solid rgb(214, 211, 211);
     border-bottom: 0.5px solid rgb(214, 211, 211);
 }
 
-/* Criar Post */
+/* Blog - tablet */
+@media only screen and (max-width: 1000px) {
+    .card-img-top {
+        width: 170px;
+        height: 170px;
+    }
+}
 
+/* Blog - mobile */
+@media only screen and (max-width: 768px) {
+    .card-img-top {
+        padding: 0;
+        display: none;
+    }
+    .card-body-image {
+        height: 0px;
+    }
+}
+
+/* Criar Post */
 .insert-title {
     margin-bottom: 30px;
     font-family: 'Doppio One', sans-serif;
     font-size: 32px;
     color: black;
+    width: 100%;
 }
 
+#error {
+    display: none;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+#error-text {
+    font-size: 18px;
+}
 
 .insert-title::placeholder {
     color: black;
     background-color: none;
 }
 
+/* Criar Post - mobile */
 @media only screen and (max-width: 768px) {
     #insertTitle {
         font-size: 28px;
     }
-
-    .image-post {
-        display: contents;
-    }
-
     .card-body {
         padding-bottom: 0;
     }
 }
 
-#error {
-    display: none;
-    gap: 100px;
-}
 
-#error-text {
-    display: contents;
-    font-size: 18px;
-}
 
 
 /* Ver Post */
@@ -265,10 +278,7 @@ input {
     right: 15px;
 }
 
-#error {
-    justify-content: space-between;
-    align-items: center;
-}
+
 
 .container-contact {
     display: block;
@@ -276,18 +286,14 @@ input {
 
 
 
-/* Login */
+/* Login Page */
 
 .login-page {
-    width: 360px;
     padding: 6% 0 0;
     margin: auto;
 }
 
 .form {
-    position: relative;
-    z-index: 1;
-    background: #FFFFFF;
     max-width: 360px;
     margin: 0 auto 100px;
     padding: 45px;
@@ -300,103 +306,23 @@ input {
 }
 
 .form input {
-    outline: 0;
-    background: #f2f2f2;
+    border-bottom: 1px solid #000000;
     width: 100%;
-    border: 0;
-    margin: 0 0 15px;
+    margin: 0 0 25px;
     padding: 15px;
-    box-sizing: border-box;
-    font-size: 14px;
 }
 
 .form button {
-    text-transform: uppercase;
-    outline: 0;
     background: rgb(126, 121, 121);
     width: 100%;
     border: 0;
     padding: 15px;
     color: #FFFFFF;
-    font-size: 14px;
-    -webkit-transition: all 0.3 ease;
-    transition: all 0.3 ease;
     cursor: pointer;
 }
 
-.form .message {
-    margin: 15px 0 0;
-    color: #b3b3b3;
-    font-size: 12px;
-}
-
-.form .message a {
-    color: rgb(126, 121, 121);
-    text-decoration: none;
-}
-
-.form .register-form {
-    display: none;
-}
-
-
-.container:before,
-.container:after {
-    content: "";
-    display: block;
-    clear: both;
-}
-
-.container .info {
-    margin: 50px auto;
-    text-align: center;
-}
-
-.container .info h1 {
-    margin: 0 0 15px;
-    padding: 0;
-    font-size: 36px;
-    font-weight: 300;
-    color: #1a1a1a;
-}
-
-.container .info span {
-    color: #4d4d4d;
-    font-size: 12px;
-}
-
-.container .info span a {
-    color: #000000;
-    text-decoration: none;
-}
-
-.container .info span .fa {
-    color: #EF3B3A;
-}
-
-.button-error {
+ .button-error {
     background-color: transparent !important;
     color: #000000 !important;
-    text-align: right !important;
     font-size: 30px !important;
-    width: 10px;
-    display: contents;
-}
-
-
-
-
-
-
-
-/* mobile */
-
-@media only screen and (max-width: 768px) {}
-
-.image-post {
-    max-width: 100%;
-}
-
-img {
-    max-width: 100%;
-}
+} 
