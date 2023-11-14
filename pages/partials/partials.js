@@ -146,7 +146,7 @@ class Post extends HTMLElement {
     // Imagem
     if (this.image) {
       template += `
-        <div class="col-12 col-md-3">
+        <div class="col-12 col-md-3 card-body-image">
             <div class="card border-0">
             <div class="card-body">
                 <img
