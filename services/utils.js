@@ -61,9 +61,7 @@ function removeImagesFromText(text, images) {
 function getFirstImage(text) {
     let tempElement = document.createElement('div');
     tempElement.innerHTML = text;
-
     let firstImage = tempElement.querySelector('img');
-
     if (firstImage) {
         return firstImage.src;
     } else {

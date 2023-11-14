@@ -29,7 +29,6 @@ const createPost = async (title, text, files) => {
   body.append('title', title);
   body.append('text', text);
   files.forEach((image) => body.append('file', image.file));
-
   const response = await fetch(URL + "post/new", { method: 'POST', headers, body });
   if (response.ok) {
     const result = await response.json();
@@ -82,21 +81,6 @@ const sendMailNotification = async (firstName, lastName, email, subject, message
   }
   return null;
 };
-
-// const uploadImage = async (formData) => {
-//   // const headers = {'Content-Type': `multipart/form-data; boundary=${formData.getBoundary()}`};
-//   const body = formData;
-//   const response = await fetch(URL + "uploadImage", { method: 'POST', body });
-//   console.log("dsdssssss", response);
-//   if (response.ok) {
-//     const result = await response.json();
-//     console.log("ssssssaaaa", result);
-//     return result;
-//   } else {
-//     console.error("Something went wrong");
-//   }
-//   return null;
-// };
 
 
 
