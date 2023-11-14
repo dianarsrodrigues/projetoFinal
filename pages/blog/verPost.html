@@ -95,7 +95,6 @@
                 document.getElementById("title").textContent = post.title;
                 document.getElementById("date").textContent = dataHoraFormatada;
                 document.getElementById("text").innerHTML = post.text;
-
                 postSection.classList.remove('hide-post');
             } else {
                 console.error("Post do not exist");
@@ -107,7 +106,6 @@
 
             const title = document.getElementById("title").value;
             const text = document.getElementById("text").value;
-
             window.location.href = `criarPost.html?id=${id}`;
         });
 

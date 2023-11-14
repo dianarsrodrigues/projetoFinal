@@ -73,8 +73,8 @@
         const id = urlParams.get("id");
         var toolbarOptions = [
             [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-            [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
-            ['bold', 'italic', 'underline'],        // toggled buttons
+            [{ 'size': ['small', false, 'large', 'huge'] }],
+            ['bold', 'italic', 'underline'],
             ['blockquote', 'code-block'],
             [{ 'align': [] }],
             [{ 'list': 'ordered' }, { 'list': 'bullet' }],
@@ -129,7 +129,6 @@
                 const files = generateImageFromBase64(images);
                 const textWithoutImages = removeImagesFromText(text, files);
                 const response = id ? await updatePost(id, title, textWithoutImages, files) : await createPost(title, textWithoutImages, files);
-
                 if (response) {
                     window.location.href = `verPost.html?id=${response.id || id}`;
                 }
@@ -141,17 +140,13 @@
             addEventSubmit(myEditor);
         }
 
-
         const updateAction = async () => {
             getPost(id).then(async (postArray) => {
                 if (postArray.length > 0) {
                     const post = postArray[0];
 
                     document.getElementById("title").value = post.title;
-                    // const textToEdit = new DOMParser().parseFrom (post.text, 'text/html').body.textContent;
-
                     const myEditor = await initEditor(post.text, post.title);
-                    // console.log('asdasda', textToEdit);
                     addEventSubmit(myEditor);
                 } else {
                     console.error("Post do not exist");
@@ -166,9 +161,6 @@
             // Create
             createAction();
         }
-
-
     </script>
 </body>
-
 </html>

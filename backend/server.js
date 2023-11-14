@@ -34,14 +34,13 @@ const transporter = nodemailer.createTransport({
 // Configuração do Multer para o armazenamento de arquivos
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
-    callback(null, 'uploads/'); // Pasta onde os arquivos serão armazenados
-    console.log("entrou3");
+    callback(null, 'uploads/');
   },
   filename: (req, file, callback) => {
-    callback(null, file.originalname); // Use o nome original do arquivo
-    console.log("entrou4");
+    callback(null, file.originalname);
   },
 });
+
 
 const upload = multer({ storage: storage });
 
@@ -69,10 +68,10 @@ app.get("/post/:id", sqlUtils.functionGetPost);
 //Get Blog
 app.get("/posts", sqlUtils.functionGetPosts);
 
- // Login and generate a token
+// Login and generate a token
 app.post('/login', sqlUtils.functionLogin);
     
-
+// Send notification to email
 app.post('/contacts', (req, res) => {
   const firstName = req.body.firstName;
   const lastName = req.body.lastName;
@@ -82,9 +81,9 @@ app.post('/contacts', (req, res) => {
 
   const mailOptions = {
     from: 'teste12356@outlook.pt',
-    to: 'teste12356@outlook.pt',
-    subject: subject,
-    text: `Nome: ${firstName} ${lastName} \nEmail: ${email} \n\nMensagem: ${message}`
+    to: `teste12356@outlook.pt, ${email}`,
+    subject: `Mensagem enviada com sucesso - ${subject}`,
+    text: `Olá! Recebi a sua mensagem. Em breve entrarei em contacto.\n\n\nDados da Mensagem:\nNome: ${firstName} ${lastName} \nEmail: ${email} \nMensagem: ${message}\n\nCumprimentos \nBruna Silva`
   };
 
   transporter.sendMail(mailOptions, function (error, info) {
@@ -96,8 +95,8 @@ app.post('/contacts', (req, res) => {
       res.json({ message: 'E-mail enviado com sucesso' });
     }
   });
-});
 
+});
 
 app.post('/uploadImage', upload.single('file'), (req, res) => {
   if (!req.file) {
@@ -113,11 +112,6 @@ app.post('/uploadImage', upload.single('file'), (req, res) => {
     })
   }
 });
-
-
-
-
-
 
 app.listen(PORT, (err) => {
   if (err) console.log("Error in server setup");

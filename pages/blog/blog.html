@@ -41,10 +41,8 @@
   <script src="./../../services/postService.js"></script>
   <script src="./../../services/utils.js"></script>
   <script>
-  
 
     const postsSection = document.querySelector("#posts");
-
     getPosts().then((posts) =>
       posts.forEach((post) => {
         const image = getFirstImage(post.text);
