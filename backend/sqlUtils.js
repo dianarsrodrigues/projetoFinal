@@ -37,7 +37,7 @@ const verifyToken = (req, res) => {
 //Inserir Post
 const functionInsertPost = (req, res) => {
     if (verifyToken(req, res) != true) {
-        return;
+       return;
     }
     
     const con = openConection();

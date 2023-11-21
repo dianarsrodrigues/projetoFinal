@@ -88,10 +88,10 @@ class Footer extends HTMLElement {
                         </p>
                     </div>
                     <div class="col-12 col-md-4 mb-4 mb-md-0">
-                        <a class="social-icon" href="#" target="_blank">
+                        <a class="social-icon" href="https://www.linkedin.com/" target="_blank">
                             <i class="fab fa-linkedin-in"></i>
                         </a>
-                        <a class="social-icon" href="#" target="_blank">
+                        <a class="social-icon" href="https://github.com/" target="_blank">
                             <i class="fab fa-github"></i>
                         </a>
                     </div>

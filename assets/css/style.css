@@ -1,6 +1,6 @@
 body {
     font-family: 'Dosis', sans-serif;
-    font-size: 16px;
+    font-size: 18px;
     line-height: 120%;
     letter-spacing: -0.63px;
     display: flex;
@@ -316,8 +316,14 @@ input {
     cursor: pointer;
 }
 
- .button-error {
+.button-error {
     background-color: transparent !important;
     color: #000000 !important;
     font-size: 30px !important;
+    width: 0 !important;
+    padding:15px !important;
 } 
+
+img {
+    width: 100%;
+}

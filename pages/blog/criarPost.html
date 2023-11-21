@@ -24,6 +24,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Doppio+One&family=Dosis&family=Lato&display=swap" rel="stylesheet" />
 
+    <script>
+        if (!localStorage.getItem('token')) {
+            window.location.href = `../login/login.html`;
+        }
+    </script>
+    
     <!-- Bootstrap link JavaScript  -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
@@ -116,7 +122,7 @@
                 const errorBox = document.querySelector("#error");
                 const errorCloseButton = errorBox.querySelector(".close");
 
-                if (!title || !text) {
+                if (!title || text == "<p><br></p>") {
                     document.querySelector("#error-text").textContent = 'Por favor, preencha o título e adicione algumas palavras.';
                     errorBox.style.display = "flex";
 
@@ -161,6 +167,8 @@
             // Create
             createAction();
         }
+
+        
     </script>
 </body>
 </html>

@@ -29,14 +29,22 @@ const createPost = async (title, text, files) => {
   body.append('title', title);
   body.append('text', text);
   files.forEach((image) => body.append('file', image.file));
-  const response = await fetch(URL + "post/new", { method: 'POST', headers, body });
-  if (response.ok) {
-    const result = await response.json();
-    return result;
+  console.log(token);
+  if (token) {
+    const response = await fetch(URL + "post/new", { method: 'POST', headers, body });
+    if (response.ok) {
+      const result = await response.json();
+      return result;
+    } else {
+      console.error("Post not created");
+      return null;
+    }
   } else {
-    console.error("Post not created");
+    window.location.href = `../login/login.html`;
+    return null;
   }
-  return null;
+  
+ 
 };
 
 const updatePost = async (id, title, text, files) => {
