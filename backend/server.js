@@ -1,12 +1,12 @@
 const express = require("express");
-const cors = require("cors");
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const cors = require("cors"); //fazer pedidos ao frontend
+const jwt = require('jsonwebtoken'); //criação do token
+const bcrypt = require('bcrypt'); //encriptação da password
 const multer = require('multer'); //upload das imagens
-const nodemailer = require("nodemailer");
+const nodemailer = require("nodemailer"); //envio de mails
 const bodyParser = require('body-parser');
-const sqlUtils = require("./sqlUtils.js");
-const dotenv = require('dotenv');
+const sqlUtils = require("./sqlUtils.js"); 
+const dotenv = require('dotenv'); //variaveis de ambiente
 
 dotenv.config(); // Carrega variáveis de ambiente do arquivo .env
 

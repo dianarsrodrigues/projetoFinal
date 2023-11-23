@@ -43,8 +43,6 @@ const createPost = async (title, text, files) => {
     window.location.href = `../login/login.html`;
     return null;
   }
-  
- 
 };
 
 const updatePost = async (id, title, text, files) => {
