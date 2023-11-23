@@ -1,6 +1,22 @@
 # projetoFinal
 
-Este é o repositório do projeto Final. Siga as etapas abaixo para criar um novo branch, fazer commit de alterações, abrir um Pull Request e, eventualmente, fundir suas alterações com o branch principal (main).
+Este é o repositório do projeto Final. 
+
+Passos para instalar o projeto:
+1. Clonar o projeto.
+2. Importar a base de dados (pasta bd)
+3. Instalar as dependêcias, na página do backend.
+
+```shell
+npm install
+```
+
+3. Correr o servidor
+ ```shell
+npm start
+```
+
+Siga as etapas abaixo para criar um novo branch, fazer commit de alterações, abrir um Pull Request e, eventualmente, fundir suas alterações com o branch principal (main).
 
 ## Criar um Novo Branch SEMPRE que começarmos uma nova tarefa
 

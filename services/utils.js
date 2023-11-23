@@ -67,4 +67,4 @@ function getFirstImage(text) {
     } else {
         return null;
     }
-  }
+}
